@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Drill Baby Drill</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy" rel="stylesheet">
+</head>
+<body>
+  <div id="container">
+    <div id="props-panel">
+      <h2>STATUS PANEL</h2>
+      <div class="status-section">
+        <div class="section-title">CAPITAL</div>
+        <div>Turn: <span id="turn" class="yellow-value"></span> / 10</div>
+        <div>Cash: <span id="cash" class="yellow-value"></span></div>
+        <button id="nextTurnBtn" class="main-btn">Start</button>
+        <button id="accountingBtn" class="main-btn">Accounting</button>
+      </div>
+
+      <!-- Paste this updated block just after the CAPITAL section -->
+      <div class="status-section" id="insurance-mods-panel">
+        <div class="section-title">INSURANCES AND MODS</div>
+        <div class="sub-title">INSURANCES</div>
+        <label><input type="checkbox" class="ins-mod-checkbox insurance-box" id="chk-ins-fire"> Fire</label><br>
+        <label><input type="checkbox" class="ins-mod-checkbox insurance-box" id="chk-ins-flood"> Flood</label><br>
+        <label><input type="checkbox" class="ins-mod-checkbox insurance-box" id="chk-ins-labor"> Labor</label>
+        <div class="sub-title">EFFICIENCY MODS</div>
+        <label><input type="checkbox" class="ins-mod-checkbox mod-box" id="chk-mod-fluid"> Fluid Xfer Mod</label><br>
+        <label><input type="checkbox" class="ins-mod-checkbox mod-box" id="chk-mod-refining"> Refining Mod</label><br>
+        <label><input type="checkbox" class="ins-mod-checkbox mod-box" id="chk-mod-survey"> Survey Mod</label>
+      </div>
+
+      <div class="status-section">
+        <div class="section-title">RESOURCES</div>
+        <div class="sub-title">Crude Oil</div>
+        <div>Barrels: <span id="crude" class="yellow-value"></span> @ <span id="priceCrude" class="green-value">$</span>/bbl</div>
+        <div class="sub-title">Refineries</div>
+        <div>Small: <span id="refinery-small" class="yellow-value"></span></div>
+        <div>Medium: <span id="refinery-medium" class="yellow-value"></span></div>
+        <div>Large: <span id="refinery-large" class="yellow-value"></span></div>
+        <div>
+          <button id="buyRefBtn" class="main-btn resource-btn">Buy</button>
+          <button id="sellRefBtn" class="main-btn resource-btn">Sell</button>
+        </div>
+      </div>
+      <div class="status-section">
+        <div class="section-title">PRODUCTS</div>
+        <div>Gasoline: <span id="gasoline" class="yellow-value"></span> @ <span id="priceGasoline" class="green-value">$</span>/bbl</div>
+        <div>Diesel: <span id="diesel" class="yellow-value"></span> @ <span id="priceDiesel" class="green-value">$</span>/bbl</div>
+        <div>Bio-Gasoline: <span id="biogasoline" class="yellow-value"></span> @ <span id="priceEthanol" class="green-value">$</span>/bbl</div>
+        <div>Bio-Diesel: <span id="biodiesel" class="yellow-value"></span> @ <span id="priceBiodiesel" class="green-value">$</span>/bbl</div>
+        <button id="sellProductBtn" class="main-btn">Sell</button>
+      </div>
+      <div class="status-section">
+        <div class="section-title">COSTS</div>
+        <div>Drill / 1,000 ft: <span id="costDrill" class="yellow-value"></span></div>
+        <div>Geo-Survey: <span id="costSurvey" class="yellow-value"></span></div>
+        <div>Well Installation: <span id="costWell" class="yellow-value"></span></div>
+      </div>
+      <div class="status-section">
+        <div class="section-title">WELL MAINTENANCE</div>
+        <div class="well-buttons">
+          <button id="drillBtn" class="icon-btn" title="Drill">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <line x1="16" y1="4" x2="16" y2="24" stroke="#f7d860" stroke-width="5" stroke-linecap="round"/>
+              <polygon points="9,19 16,28 23,19" fill="#f7d860" stroke="#b1d1ee" stroke-width="2"/>
+            </svg>
+          </button>
+          <button id="setWellBtn" class="icon-btn" title="Set Well">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <line x1="16" y1="6" x2="8" y2="26" stroke="#f7d860" stroke-width="2.2"/>
+              <line x1="16" y1="6" x2="24" y2="26" stroke="#f7d860" stroke-width="2.2"/>
+              <line x1="12" y1="18" x2="20" y2="18" stroke="#f7d860" stroke-width="2"/>
+              <line x1="16" y1="6" x2="16" y2="26" stroke="#b1d1ee" stroke-width="2"/>
+              <g transform="rotate(15 16 6)">
+                <line x1="3" y1="6" x2="29" y2="6" stroke="#b1d1ee" stroke-width="2"/>
+                <line x1="3" y1="6" x2="3" y2="9" stroke="#b1d1ee" stroke-width="2"/>
+                <line x1="29" y1="6" x2="29" y2="9" stroke="#b1d1ee" stroke-width="2"/>
+              </g>
+            </svg>
+          </button>
+          <button id="geoSurveyBtn" class="icon-btn" title="Geo Survey">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <circle cx="16" cy="16" r="10" stroke="#b1d1ee" stroke-width="2.2"/>
+              <line x1="16" y1="2" x2="16" y2="30" stroke="#b1d1ee" stroke-width="2"/>
+              <line x1="2" y1="16" x2="30" y2="16" stroke="#b1d1ee" stroke-width="2"/>
+              <path d="M16,16 L6,16 A10,10 0 0,1 16,6 Z"  fill="#f7d860"/>
+              <path d="M16,16 L26,16 A10,10 0 0,1 16,26 Z" fill="#f7d860"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <button id="settingsBtn" class="main-btn">Settings</button>
+      <button id="resetBtn" class="main-btn">Reset Game</button>
+    </div>
+    <div id="gameUI">
+      <div id="grid-panel">
+        <div id="grid-title">DRILL BABY DRILL!</div>
+        <table id="xy-grid"></table>
+        <div id="well-data-bar"></div>
+      </div>
+    </div>
+  </div>
+  <div id="modalMessage">
+    <div class="modalBox" id="modalMsgContent"></div>
+  </div>
+  <div id="settingsDialog">
+    <div class="settingsBox">
+      <h2>Game Settings</h2>
+      <div>Mode:</div>
+      <div class="mode-options">
+        <button class="mode-btn" data-mode="Gambler">Gambler</button>
+        <button class="mode-btn" data-mode="CEO">CEO</button>
+        <button class="mode-btn" data-mode="Engineer">Engineer</button>
+      </div>
+      <div id="modeDesc" class="mode-desc"></div>
+      <button id="closeSettingsBtn">Close</button>
+    </div>
+  </div>
+  <div id="purchaseOrderModal" style="display: none;">
+    <div class="purchase-order"></div>
+  </div>
+  <div id="declineConfirmModal" style="display: none;">
+    <div class="decline-confirm"></div>
+  </div>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

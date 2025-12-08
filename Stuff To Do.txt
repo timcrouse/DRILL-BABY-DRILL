@@ -1,0 +1,57 @@
+ADD THE FOLLOWING SECTION TO THE STATUS PANEL IN BETWEEN CAPITAL AND RESOURCES
+"TURN INSURANCES & WORKFLOW MODS"
+Divide into two sections with sub titles matched to the style scheme
+INSURANCES AND WORKFLOW MODS
+
+-display each insurance purchased in the insurance section
+-display each workflow mod under the workflow mods section
+
+When the user presses the next turn button each of the insurances are to be cleared from the panel
+
+make provisions in the game flow logic to incorporate an expiration period of when the workflow improvements expire, see below for concept:
+
+
+
+Duration Type	Pros	Cons	Best For
+Single Turn (Temporary)	Easy to balance, forces repeat investment	Can feel repetitive or not worth the cost	Quick games, early-game options
+Persistent (Additive)	Feels rewarding and progressive	Can snowball if not capped	Long campaigns, tech trees
+Random Duration	Adds uncertainty, makes risk management more fun	Less predictable, harder to plan	Mid/late-game surprise mechanics
+
+🔄 Hybrid Option (Recommended):
+Workflow mods last 2–3 turns, but stack diminishing returns if purchased again before expiry.
+
+Turn 1: +20% boost
+Turn 2: +15%
+Turn 3: +10% → expires unless re-upped
+
+This encourages strategic timing, avoids snowballing, and makes players think ahead.
+
+💰 2. How to Gauge Cost of Workflow Modernization?
+Consider These Variables:
+Turn length remaining – cheaper early, more expensive late
+
+Current workflow inefficiencies – if they skipped past upgrades
+
+Compound modifiers – e.g., penalties from poor past planning
+
+Game phase (early/mid/late)
+
+Pricing Models:
+Model	Description	Example
+Flat Rate	Fixed cost each turn	$25,000 per use
+Scaling Rate	Increases per use	$20k, then $30k, then $45k...
+Dynamic ROI-Based	Price scales to your team’s output potential	10% of projected revenue boost
+Tiered Options	Choose between Basic, Advanced, Elite packages	$15k / $30k / $60k with increasing benefit duration and effectiveness
+
+🔧 Workflow Modernization (Turn-Based Upgrade)
+
+Duration: 2 turns per purchase
+
+Effect: +X% speed or efficiency (e.g., fewer delays, lower costs)
+
+Cost: Starts at $25k, increases by +$10k per re-purchase
+
+Limit: Max 3 stacks active
+
+
+can you incorporate these changes and provide a writeup of the final strategy implemented?

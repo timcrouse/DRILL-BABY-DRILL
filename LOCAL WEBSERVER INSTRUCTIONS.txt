@@ -1,0 +1,17 @@
+
+
+Python (built-in if you have Python 3+): Open a terminal/command prompt in your project folder and run:
+text
+
+
+RIGHT CLICK INDEX AND SELECT COMMAND TERMINAL
+
+
+python -m http.server 8000
+
+
+Visit http://localhost:8000 in your browser.
+
+http://localhost:8000
+
+ctrl+shirt+r  to refresh screen and cachae
