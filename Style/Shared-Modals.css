@@ -1,0 +1,36 @@
+/* shared-modals.css */
+
+/* ─── Shared Modal Overlay & Base ─── */
+#modalMessage,
+#settingsDialog,
+#purchaseOrderModal,
+#declineConfirmModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(20,25,55,0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+#purchaseOrderModal {
+  z-index: 2500; /* Above modalMessage */
+}
+#declineConfirmModal {
+  z-index: 3000; /* Above purchaseOrderModal */
+}
+.modalBox,
+.settingsBox,
+.purchase-order,
+.decline-confirm {
+  background: #1a2039;
+  color: #b1d1ee;
+  padding: 30px 38px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 8px 42px #000b;
+  max-width: 600px; /* Widened for single-line items */
+}

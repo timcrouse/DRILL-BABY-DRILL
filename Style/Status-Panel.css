@@ -1,0 +1,83 @@
+/* status-panel.css */
+
+/* ─── Status Panel ─── */
+#props-panel {
+  flex: 0 0 340px; /* fixed width, stretched height */
+  border: 1.5px solid #b1d1ee;
+  border-radius: 12px;
+  padding: 18px 20px;
+  overflow-y: auto;
+}
+#props-panel h2 {
+  margin: 0 0 12px;
+  color: #f7d860;
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 1.2em;
+}
+.status-section {
+  border-top: 1px solid #b1d1ee99;
+  margin: 16px 0 8px;
+  padding-top: 6px;
+}
+.status-section:first-of-type {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+.section-title {
+  font-weight: bold;
+  font-size: 1.07em;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+.sub-title {
+  font-weight: 600;
+  margin: 6px 0 2px;
+}
+/* for all your numeric spans in status panel */
+.yellow-value {
+  color: #f7d860 !important;
+  font-weight: bold;
+}
+.green-value {
+  color: #089357 !important;
+  font-weight: bold;
+}
+
+/* NEW Dedicated Checkbox Styling */
+.ins-mod-checkbox {
+  appearance: none;
+  margin-right: 8px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #b1d1ee;
+  background: #232344;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.ins-mod-checkbox:checked {
+  background: #f7d860;
+  border-color: #f7d860;
+}
+.ins-mod-checkbox:checked:after {
+  content: '\\2714';
+  color: #111237;
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  line-height: 18px;
+}
+.insurance-box {
+  accent-color: #f7d860;
+}
+.mod-box {
+  accent-color: #b1d1ee;
+}
+
+/* Insurance Label for Alignment */
+.insurance-label {
+  display: inline-block;
+  width: 60px; /* Fixed width for consistent alignment */
+}

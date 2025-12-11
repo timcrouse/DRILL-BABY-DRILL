@@ -1,0 +1,47 @@
+/* well-data-bar.css */
+
+/* ─── Well Data Bar ─── */
+#well-data-bar {
+  margin-top: 20px;
+  background: #23244a;
+  border-radius: 10px;
+  color: #b1d1ee;
+  font-size: 1.08em;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 20px 13px 20px;
+  box-shadow: 0 2px 18px #0003;
+}
+#well-data-bar .wd-row {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 2px;
+}
+#well-data-bar .wd-row:last-child {
+  margin-bottom: 0;
+}
+#well-data-bar span.label {
+  color: #a2c8f9;
+  font-weight: 700;
+  margin-right: 3px;
+}
+#well-data-bar span {
+  color: #f7d860;
+}
+#well-data-bar button {
+  margin-left: 16px;
+  padding: 6px 20px;
+  background: #232344;
+  color: #f7d860;
+  border: 2px solid #b1d1ee;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+#well-data-bar button:hover {
+  background: #222867;
+  border-color: #f7d860;
+  color: #fff;
+}

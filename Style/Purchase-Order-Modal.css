@@ -1,0 +1,16 @@
+/* purchase-order-modal.css */
+
+/* ─── Purchase Order Modal Specific ─── */
+.purchase-order h3 {
+  text-align: center;
+  color: #f7d860;
+  margin-bottom: 15px;
+}
+.purchase-order p {
+  margin: 5px 0;
+}
+.purchase-order .buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}

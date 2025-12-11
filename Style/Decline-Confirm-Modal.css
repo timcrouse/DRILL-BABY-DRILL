@@ -1,0 +1,16 @@
+/* decline-confirm-modal.css */
+
+/* ─── Decline Confirm Modal Specific ─── */
+.decline-confirm h3 {
+  text-align: center;
+  color: #f7d860;
+  margin-bottom: 15px;
+}
+.decline-confirm p {
+  margin: 5px 0;
+}
+.decline-confirm .buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}

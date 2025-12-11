@@ -1,0 +1,63 @@
+/* geo-report.css */
+
+/* ==== GeoSurvey Report Styling ==== */
+.geo-report-container {
+  padding: 16px;
+  border: 1px solid #b1d1ee;
+  border-radius: 12px;
+  background: none;
+  color: #b1d1ee;
+  max-width: 420px;
+  font-family: sans-serif;
+}
+.geo-report-title {
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #f7d860;
+}
+.geo-report-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.geo-report-label {
+  color: #a2c8f9;
+  font-weight: 600;
+}
+.geo-report-value {
+  color: #b1d1ee;
+}
+.geo-report-hr {
+  border: none;
+  border-top: 1px solid #b1d1ee;
+  margin: 12px 0;
+}
+.geo-report-conclusion {
+  font-weight: bold;
+  color: #ff6a6a;
+  margin-bottom: 6px;
+}
+.geo-report-note {
+  color: #ccc;
+  font-size: 0.9em;
+}
+.geo-report-summary {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #29a;
+}
+.geo-report-container button {
+  margin-top: 18px;
+  padding: 8px 22px;
+  background: #232344;
+  color: #b1d1ee;
+  border: 2px solid #b1d1ee;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.geo-report-container button:hover {
+  background: #1c2342;
+}

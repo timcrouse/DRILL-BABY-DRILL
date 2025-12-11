@@ -1,0 +1,19 @@
+/* global.css */
+
+/* ─── Global ─── */
+html, body {
+  height: 100vh; /* Ensure full viewport height for flex propagation */
+  margin: 0;
+  background: #111237;
+  color: #b1d1ee;
+  font-family: sans-serif;
+}
+#container {
+  height: 100%; /* Fill body height */
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch; /* make #props-panel & #gameUI equal height */
+  gap: 96px;
+  justify-content: center;
+  padding: 20px;
+}

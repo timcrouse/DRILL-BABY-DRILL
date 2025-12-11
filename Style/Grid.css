@@ -1,0 +1,84 @@
+/* grid.css */
+
+/* ─── Playing Field & Well Data ─── */
+#gameUI {
+  flex: 1; /* fill remaining horizontal space */
+  display: flex;
+  flex-direction: column; /* stack grid and well-data */
+}
+#grid-panel {
+  flex: 1; /* stretch to match #props-panel height */
+  display: flex;
+  flex-direction: column;
+  background: #18234d;
+  border-radius: 15px;
+  padding: 12px 18px 18px;
+  min-height: 450px; /* Fallback min-height to ensure visibility */
+}
+#grid-title {
+  color: #f7d860;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1.4em;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* ── Fixed-Size Grid (revert from fluid for reliability) ── */
+#xy-grid {
+  width: 100%; /* fill grid-panel width */
+  table-layout: fixed; /* equal-width columns */
+  border-collapse: collapse;
+  min-height: 400px; /* Ensure table has minimum height to show cells */
+}
+#xy-grid th {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1.4em;
+  text-align: center;
+  border: 1.5px solid #b1d1ee;
+  background: #294368bb;
+  width: 36px; /* Fixed size */
+  height: 36px; /* Fixed size */
+}
+#xy-grid th.yellow-value {
+  color: #f7d860 !important;
+}
+#xy-grid td {
+  border: 1.5px solid #b1d1ee;
+  background: #294368bb;
+  position: relative;
+  cursor: pointer;
+  width: 36px; /* Fixed size */
+  height: 36px; /* Fixed size */
+}
+#xy-grid td.selected {
+  border: 3px solid #f7d860 !important;
+}
+
+/* ─── Cell Symbols ─── */
+.cell-x {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -53%);
+  font-size: 2.1em;
+  font-weight: 900;
+}
+.x-dry { color: #ffe14a; }
+.x-struck { color: #47ff5e; }
+.x-well-prod { color: #2fff8b; }
+.x-well-noprod { color: #ff3939; }
+.x-geo { color: #ff8800; }
+.geo-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff8800;
+  transform: translate(-50%, -50%);
+  border: 2px solid #fff7;
+  box-shadow: 0 0 5px #ff8400a1;
+  pointer-events: none;
+  z-index: 10;
+}

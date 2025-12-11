@@ -1,0 +1,10 @@
+/* turn-note.css */
+
+/* ─── Turn Modal Note Styling ─── */
+.turn-note {
+  color: #f7d860;
+  text-align: left;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  font-size: 0.9em;
+}

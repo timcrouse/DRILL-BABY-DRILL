@@ -1,53 +1,55 @@
-/* main.js */
-import { selectedCell, generateOilMap, gameState, getModeDesc }       from './data.js';
-import { renderGrid, updateGameUI, showModalMessage, hideModalMessage } from './ui.js';
-import { drillWell, setWell, geoSurvey, nextTurn }                      from './actions.js';
+// main.js - App entry point: Orchestrates init and events (modular version)
 
-window.onload = () => {
+import { 
+  selectedCell, 
+  generateOilMap, 
+  gameState, 
+  getModeDesc 
+} from './Data/index.js';
+import { 
+  renderGrid, 
+  updateGameUI, 
+  showModalMessage, 
+  hideModalMessage 
+} from './UI/index.js';
+import { 
+  drillWell, 
+  setWell, 
+  geoSurvey, 
+  nextTurn,
+  showTurnModal,
+  buySelectedItems,
+  confirmPurchase,
+  confirmDecline,
+  hidePurchaseOrder,
+  hideDeclineConfirm,
+  hideAllModals
+} from './Actions/index.js';
+import { loadAllStyles } from './Style/index.js';
+import { getRandomElement } from './Utils/index.js';
+
+// Init and events (modular)
+import { bootstrap } from './init.js';
+import { bindEvents } from './events.js';
+
+// Expose globals for HTML onclick (as in original)
+window.showModalMessage = showModalMessage;
+window.hideModalMessage = hideModalMessage;
+window.showTurnModal = showTurnModal;
+window.buySelectedItems = buySelectedItems;
+window.confirmPurchase = confirmPurchase;
+window.confirmDecline = confirmDecline;
+window.hidePurchaseOrder = hidePurchaseOrder;
+window.hideDeclineConfirm = hideDeclineConfirm;
+window.hideAllModals = hideAllModals;
+window.updateTurnButtonLabel = () => {}; // From actions if exported
+
+// Onload: Chain modular init
+window.onload = async () => {
   console.log('window.onload triggered');
-
-  // Add this at the end of window.onload
-  document.querySelectorAll('.insurance-box').forEach(cb => cb.checked = false);
-
-  generateOilMap();
-  updateGameUI();
+  await bootstrap(); // Handles styles, data, UI, checkboxes
+  bindEvents(); // Wires interactions
 };
 
-document.getElementById('drillBtn').onclick     = () => drillWell(selectedCell.x, selectedCell.y);
-document.getElementById('setWellBtn').onclick   = () => setWell(selectedCell.x, selectedCell.y);
-document.getElementById('geoSurveyBtn').onclick = () => geoSurvey(selectedCell.x, selectedCell.y);
-
-document.getElementById('nextTurnBtn').onclick  = () => {
-  console.log('nextTurnBtn clicked');
-  gameState.turn += 1; // Increment turn to start at Turn 1
-  nextTurn();
-};
-document.getElementById('accountingBtn').onclick= () => showModalMessage('Accounting coming soon');
-
-document.getElementById('settingsBtn').onclick = () => {
-  document.getElementById('settingsDialog').style.display='flex';
-  document.getElementById('modeDesc').innerHTML = getModeDesc(gameState.mode);
-  document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('selected', b.dataset.mode === gameState.mode));
-};
-document.getElementById('closeSettingsBtn').onclick = () => document.getElementById('settingsDialog').style.display='none';
-document.getElementById('resetBtn').onclick = () => { generateOilMap(); updateGameUI(); };
-
-document.querySelectorAll('.mode-btn').forEach(btn => {
-  btn.onclick = () => {
-    gameState.mode = btn.dataset.mode;
-    updateGameUI();
-    document.getElementById('modeDesc').innerHTML = getModeDesc(gameState.mode);
-    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-  };
-});
-
-// Prevent modal closure on clicking inside modal content
-document.getElementById('modalMsgContent').addEventListener('click', (event) => {
-  event.stopPropagation();
-});
-document.getElementById('purchaseOrderModal').addEventListener('click', (event) => {
-  if (event.target === document.getElementById('purchaseOrderModal')) {
-    window.hidePurchaseOrder();
-  }
-});
+// Export for root index.js barrel
+export { initApp }; // Optional: Alias to bootstrap if needed

@@ -1,0 +1,49 @@
+/* buttons.css */
+
+/* ─── Buttons ─── */
+.main-btn {
+  background: #232344;
+  border: 2px solid #b1d1ee;
+  border-radius: 8px;
+  color: #f7d860;
+  padding: 6px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 7px #1112;
+  margin: 4px 4px 4px 0;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.main-btn:hover,
+.main-btn:focus {
+  background: #222867;
+  border-color: #f7d860;
+  color: #fff;
+}
+.resource-btn {
+  width: calc(4ch + 40px);
+}
+.well-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.icon-btn {
+  background: #232344;
+  border: 2px solid #b1d1ee;
+  border-radius: 6px;
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.icon-btn:hover {
+  background: #222867;
+  border-color: #f7d860;
+}
+.icon-btn svg {
+  width: 32px;
+  height: 32px;
+}
