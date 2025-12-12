@@ -52,4 +52,4 @@ window.onload = async () => {
 };
 
 // Export for root index.js barrel
-export { initApp }; // Optional: Alias to bootstrap if needed
+//export { initApp }; // Optional: Alias to bootstrap if needed
