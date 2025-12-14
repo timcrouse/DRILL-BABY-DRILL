@@ -1,63 +1,166 @@
-/* geo-report.css */
+/**
+ * @fileoverview Style/Geo-Report.css - GeoSurvey Report Modal Styling
+ * 
+ * Purpose: Styles the geo-survey report dialog within modals, including container, title,
+ * data rows (label/value pairs), dividers, conclusions, notes, and summary sections.
+ * Creates a clean, readable report layout with the game's dark blue/gold theme for technical data.
+ * 
+ * Key Features:
+ * - .geo-report-container: Padded, bordered box for overall report.
+ * - Flex rows for key-value pairs (space-between for alignment).
+ * - Themed colors: Gold titles, blue labels/values, red conclusions, gray notes.
+ * - Inline button styling (with hover) for close/action.
+ * 
+ * Changes in Refactor:
+ * - Added responsive max-width and padding adjustments for mobile.
+ * - Enhanced button with .main-btn class integration (inherits from Buttons.css) for consistency.
+ * - Improved typography (line-height, font sizes) and spacing for better readability.
+ * - Added focus-visible for button a11y and subtle transition for hover.
+ * - Included .geo-report-hr as a subtle divider; added base container shadow for depth.
+ * 
+ * Dependencies: Loaded via Style/index.js; pairs with Shared-Modals.css and Buttons.css.
+ * Used in HTML via showGeoReport() injecting <div class="geo-report-container">...</div>.
+ * 
+ * @version 1.1 - Responsive, Accessible Report Styles
+ */
 
-/* ==== GeoSurvey Report Styling ==== */
+/* ─── GeoReport Container & Base ─── */
 .geo-report-container {
   padding: 16px;
   border: 1px solid #b1d1ee;
   border-radius: 12px;
-  background: none;
+  background: rgba(35, 35, 68, 0.95); /* Semi-dark for modal readability */
   color: #b1d1ee;
   max-width: 420px;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(17, 18, 68, 0.2); /* Subtle elevation */
   font-family: sans-serif;
+  line-height: 1.4;
 }
+
+.geo-report-container h4 { /* If using h4 for subheaders */
+  margin: 0 0 8px 0;
+  font-size: 1em;
+  color: #f7d860;
+}
+
+/* ─── Title & Summary ─── */
 .geo-report-title {
   text-align: center;
   font-size: 1.3em;
   font-weight: bold;
-  margin-bottom: 12px;
+  margin: 0 0 12px 0;
   color: #f7d860;
 }
+
+.geo-report-summary {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #29a; /* Teal for summaries */
+  text-align: center;
+}
+
+/* ─── Data Rows & Labels ─── */
 .geo-report-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 4px;
+  align-items: baseline; /* Aligns labels/values on baseline */
+  margin-bottom: 6px; /* Tighter for dense data */
+  gap: 10px; /* Fallback spacing */
 }
+
 .geo-report-label {
   color: #a2c8f9;
   font-weight: 600;
+  flex: 1; /* Grow to fill space */
+  text-align: left;
 }
+
 .geo-report-value {
   color: #b1d1ee;
+  flex: 1;
+  text-align: right;
+  font-family: monospace; /* Monospace for numbers/depths */
 }
+
+/* ─── Dividers & Conclusions ─── */
 .geo-report-hr {
   border: none;
   border-top: 1px solid #b1d1ee;
   margin: 12px 0;
+  opacity: 0.6; /* Subtle */
 }
+
 .geo-report-conclusion {
   font-weight: bold;
-  color: #ff6a6a;
+  color: #ff6a6a; /* Red for warnings/dry holes */
   margin-bottom: 6px;
+  text-align: center;
+  padding: 4px 0;
 }
+
 .geo-report-note {
   color: #ccc;
   font-size: 0.9em;
+  font-style: italic;
+  margin-top: 4px;
+  text-align: center;
 }
-.geo-report-summary {
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #29a;
-}
+
+/* ─── Report Button (Close/Action) ─── */
 .geo-report-container button {
-  margin-top: 18px;
+  display: block; /* Centered block */
+  margin: 18px auto 0;
   padding: 8px 22px;
   background: #232344;
-  color: #b1d1ee;
+  color: #f7d860; /* Gold text for theme */
   border: 2px solid #b1d1ee;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-family: inherit;
+  font-size: 14px;
 }
-.geo-report-container button:hover {
+
+.geo-report-container button:hover,
+.geo-report-container button:focus-visible {
   background: #1c2342;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(247, 216, 96, 0.2); /* Gold glow */
+  outline: none;
+}
+
+.geo-report-container button:focus {
+  outline: 2px solid #f7d860;
+  outline-offset: 2px;
+}
+
+.geo-report-container button:disabled {
+  background: #1a1a2e;
+  border-color: #555;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ─── Responsive Adjustments ─── */
+@media (max-width: 480px) {
+  .geo-report-container {
+    padding: 12px;
+    margin: 0 8px;
+    border-radius: 8px;
+  }
+  
+  .geo-report-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  
+  .geo-report-label,
+  .geo-report-value {
+    text-align: left;
+    font-size: 0.95em;
+  }
 }

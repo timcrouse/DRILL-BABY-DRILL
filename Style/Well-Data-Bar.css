@@ -1,35 +1,79 @@
-/* well-data-bar.css */
+/**
+ * @fileoverview Style/Well-Data-Bar.css - Well Data Bar Styling
+ * 
+ * Purpose: Styles the well data bar below the grid, displaying location, depth, production,
+ * and geo-report button in a compact, column-flex layout. Uses dark bg with gold/blue accents
+ * for readability, and flex rows for aligned data/labels. Button styles align with main-btn
+ * for consistency in actions.
+ * 
+ * Key Features:
+ * - #well-data-bar: Flex column with gaps, rounded shadow box.
+ * - .wd-row: Horizontal flex for label-value pairs with spacing.
+ * - .label: Blue bold for keys (e.g., "Location:").
+ * - Spans: Gold for values.
+ * - Button: Themed with hover/focus for geo report.
+ * 
+ * Changes in Refactor:
+ * - Added responsiveness: Stack rows vertically on small screens, scale padding/font.
+ * - Enhanced a11y: Focus-visible on button, larger touch targets.
+ * - Polish: Subtle transitions (incl. button), rgba shadows, consistent button from Buttons.css.
+ * - Organized sections; removed redundant margins, added disabled state.
+ * 
+ * Dependencies: Loaded via Style/index.js; builds on Buttons.css for .main-btn integration.
+ * Used in UI/WellDataBar.js via innerHTML injection: <div class="wd-row"><span class="label">Location:</span><span>(x,y)</span></div>.
+ * 
+ * @version 1.1 - Responsive, Accessible Data Bar
+ */
 
-/* ─── Well Data Bar ─── */
+/* ─── Well Data Bar Container ─── */
 #well-data-bar {
   margin-top: 20px;
-  background: #23244a;
+  background: #23244a; /* Dark blue base */
   border-radius: 10px;
   color: #b1d1ee;
   font-size: 1.08em;
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 12px 20px 13px 20px;
-  box-shadow: 0 2px 18px #0003;
+  padding: 12px 20px 13px;
+  box-shadow: 0 2px 18px rgba(0, 0, 3, 0.2); /* Subtle rgba shadow */
+  transition: box-shadow 0.2s ease; /* Gentle lift */
+  font-family: inherit;
+  line-height: 1.4;
 }
+
+#well-data-bar:hover {
+  box-shadow: 0 4px 24px rgba(0, 0, 3, 0.3);
+}
+
+/* ─── Data Rows ─── */
 #well-data-bar .wd-row {
   display: flex;
   align-items: center;
   gap: 32px;
   margin-bottom: 2px;
 }
+
 #well-data-bar .wd-row:last-child {
   margin-bottom: 0;
 }
+
+/* ─── Labels & Values ─── */
 #well-data-bar span.label {
   color: #a2c8f9;
   font-weight: 700;
   margin-right: 3px;
+  min-width: 80px; /* Consistent label width */
+  text-align: right; /* Right-align labels */
 }
-#well-data-bar span {
-  color: #f7d860;
+
+#well-data-bar span:not(.label) {
+  color: #f7d860; /* Gold for all values */
+  font-weight: 500;
+  flex: 1; /* Grow to fill space */
 }
+
+/* ─── Geo Report Button ─── */
 #well-data-bar button {
   margin-left: 16px;
   padding: 6px 20px;
@@ -39,9 +83,66 @@
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
+  font-size: 0.95em;
+  transition: 
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease;
+  min-width: 100px; /* Touch-friendly */
 }
-#well-data-bar button:hover {
+
+#well-data-bar button:hover,
+#well-data-bar button:focus-visible {
   background: #222867;
   border-color: #f7d860;
   color: #fff;
+  transform: translateY(-1px); /* Subtle lift */
+  outline: none;
+}
+
+#well-data-bar button:focus {
+  outline: 2px solid #f7d860;
+  outline-offset: 2px;
+}
+
+#well-data-bar button:disabled {
+  background: #1a1a2e;
+  border-color: #555;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+/* ─── Responsive Adjustments ─── */
+@media (max-width: 768px) {
+  #well-data-bar {
+    padding: 10px 16px 11px;
+    font-size: 1em;
+    gap: 3px;
+  }
+  
+  #well-data-bar .wd-row {
+    gap: 16px;
+    flex-wrap: wrap; /* Wrap if cramped */
+  }
+  
+  span.label {
+    min-width: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  #well-data-bar .wd-row {
+    flex-direction: column; /* Stack on tiny screens */
+    align-items: flex-start;
+    gap: 2px;
+  }
+  
+  #well-data-bar button {
+    margin-left: 0;
+    margin-top: 4px;
+    width: 100%; /* Full-width button */
+  }
 }

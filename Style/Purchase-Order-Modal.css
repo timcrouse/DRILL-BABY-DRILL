@@ -1,16 +1,134 @@
-/* purchase-order-modal.css */
+/**
+ * @fileoverview Style/Purchase-Order-Modal.css - Purchase Order Modal Styling
+ * 
+ * Purpose: Styles the purchase order confirmation modal, including header, descriptive text,
+ * item lists (if any), and button layout for Confirm/Cancel actions. Maintains the game's
+ * dark theme with gold accents for a professional, ledger-like feel in the oil business UI.
+ * 
+ * Key Features:
+ * - h3: Centered gold title for order summary.
+ * - p: Spaced paragraphs for order details or instructions.
+ * - .buttons: Flex container for action buttons (space-between for balanced layout).
+ * - Optional .purchase-items for list styling if injecting tables/lists.
+ * 
+ * Changes in Refactor:
+ * - Added base .purchase-order container for modal body (bg, padding, shadow).
+ * - Integrated responsive flex (wrap/column on small screens) and button inheritance from .main-btn.
+ * - Enhanced typography (weights, line-height) and colors for hierarchy.
+ * - Added a11y (focus outlines) and subtle transitions for interactivity.
+ * - Included .purchase-items example for common order lists (e.g., refinery costs).
+ * 
+ * Dependencies: Loaded via Style/index.js; assumes .main-btn from Buttons.css.
+ * Used in HTML for modals like <div class="purchase-order">...</div>.
+ * 
+ * @version 1.1 - Responsive, Themed Purchase Modal
+ */
 
-/* ─── Purchase Order Modal Specific ─── */
+/* ─── Purchase Order Modal Container ─── */
+.purchase-order {
+  background: rgba(35, 35, 68, 0.95); /* Dark overlay bg */
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 450px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(17, 18, 68, 0.3);
+  color: #e0e0e0; /* Light text */
+  font-family: inherit;
+  line-height: 1.5;
+}
+
 .purchase-order h3 {
   text-align: center;
   color: #f7d860;
-  margin-bottom: 15px;
+  margin: 0 0 15px 0;
+  font-size: 1.2em;
+  font-weight: 600;
 }
+
 .purchase-order p {
-  margin: 5px 0;
+  margin: 8px 0;
+  line-height: 1.4;
+  font-size: 0.95em;
+  color: #b1d1ee; /* Subtle blue for details */
 }
+
+/* ─── Optional Purchase Items List ─── */
+.purchase-order .purchase-items {
+  margin: 12px 0;
+  padding: 10px;
+  background: rgba(41, 67, 104, 0.5); /* Faded panel for items */
+  border-radius: 6px;
+  border: 1px solid #b1d1ee;
+}
+
+.purchase-order .purchase-items ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.purchase-order .purchase-items li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(177, 209, 238, 0.2);
+}
+
+.purchase-order .purchase-items .item-name {
+  font-weight: 500;
+  color: #f7d860; /* Gold for item names */
+}
+
+.purchase-order .purchase-items .item-cost {
+  color: #47ff5e; /* Green for costs/prices */
+  font-family: monospace; /* Numeric alignment */
+}
+
+/* ─── Button Layout ─── */
 .purchase-order .buttons {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
   margin-top: 20px;
+  flex-wrap: wrap; /* Responsive wrap */
+}
+
+.purchase-order .buttons .main-btn {
+  flex: 1; /* Equal width */
+  min-width: 90px; /* Prevent narrow buttons */
+  margin: 0; /* Reset globals */
+}
+
+.purchase-order .buttons .main-btn:first-child {
+  background: #1c2342; /* Slightly darker for Confirm */
+  border-color: #47ff5e; /* Green border for positive action */
+}
+
+.purchase-order .buttons .main-btn:first-child:hover {
+  border-color: #2fff8b; /* Brighter green hover */
+}
+
+.purchase-order .buttons .main-btn:focus-visible {
+  outline: 2px solid #f7d860;
+  outline-offset: 2px;
+}
+
+/* ─── Media Query for Small Screens ─── */
+@media (max-width: 480px) {
+  .purchase-order {
+    width: 95%;
+    padding: 15px;
+  }
+  
+  .purchase-order .buttons {
+    flex-direction: column; /* Stack buttons */
+    gap: 8px;
+  }
+  
+  .purchase-order .purchase-items li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
 }

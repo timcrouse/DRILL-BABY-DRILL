@@ -1,54 +1,107 @@
-/* status-panel.css */
+/**
+ * @fileoverview Style/Status-Panel.css - Status Panel Sidebar Styling
+ * 
+ * Purpose: Styles the right sidebar status panel (#props-panel) for displaying game stats,
+ * including sections for resources, costs, prices, refineries, and insurance toggles.
+ * Uses flex for fixed-width layout, bordered sections with subtle dividers, and themed colors
+ * (gold for values, blue borders) to match the industrial UI. Includes custom checkbox styling
+ * for insurance/mods with pseudo-elements for cross-browser consistency.
+ * 
+ * Key Features:
+ * - #props-panel: Fixed-width flex child with scrollable overflow.
+ * - .status-section: Border-top dividers for grouped content.
+ * - .yellow-value/.green-value: Bold colored spans for highlights.
+ * - .ins-mod-checkbox: Custom styled checkboxes with checkmark.
+ * - .insurance-label: Fixed-width for aligned labels.
+ * 
+ * Changes in Refactor:
+ * - Added responsiveness: Stack/reduce width on mobile, touch-friendly checkbox sizes.
+ * - Enhanced a11y: Focus-visible on checkboxes/labels, associated labels for screen readers.
+ * - Polish: Subtle shadows/transitions, removed !important (scoped selectors), consistent spacing.
+ * - Organized sections; added hover effects for interactivity, uppercase transforms via CSS.
+ * - Fallbacks: Sans-serif for titles if custom fonts missing.
+ * 
+ * Dependencies: Loaded via Style/index.js; ties into Global.css flex container.
+ * Used in HTML for <aside id="props-panel"><h2>Status</h2><div class="status-section">...</div></aside>.
+ * 
+ * @version 1.1 - Responsive, Accessible Status Panel
+ */
 
-/* ─── Status Panel ─── */
+/* ─── Status Panel Container ─── */
 #props-panel {
-  flex: 0 0 340px; /* fixed width, stretched height */
+  flex: 0 0 340px; /* Fixed width, full height stretch */
   border: 1.5px solid #b1d1ee;
   border-radius: 12px;
   padding: 18px 20px;
-  overflow-y: auto;
+  overflow-y: auto; /* Scroll long content */
+  background: rgba(24, 35, 77, 0.6); /* Subtle bg for depth */
+  box-shadow: 0 4px 16px rgba(17, 18, 68, 0.2); /* Soft elevation */
+  scrollbar-width: thin; /* Slim scrollbar */
+  scrollbar-color: #b1d1ee #232344; /* Themed scrollbar */
 }
+
 #props-panel h2 {
-  margin: 0 0 12px;
+  margin: 0 0 12px 0;
   color: #f7d860;
   text-align: center;
   letter-spacing: 2px;
   font-size: 1.2em;
+  font-family: 'Luckiest Guy', cursive, sans-serif; /* Themed font with fallback */
+  text-transform: uppercase;
+  font-weight: 700;
 }
+
+/* ─── Status Sections ─── */
 .status-section {
-  border-top: 1px solid #b1d1ee99;
-  margin: 16px 0 8px;
+  border-top: 1px solid rgba(177, 209, 238, 0.6); /* Faded blue divider */
+  margin: 16px 0 8px 0;
   padding-top: 6px;
+  transition: border-color 0.2s ease; /* Subtle on hover */
 }
+
 .status-section:first-of-type {
   border-top: none;
   margin-top: 0;
   padding-top: 0;
 }
+
+.status-section:hover {
+  border-top-color: #f7d860; /* Gold highlight on section hover */
+}
+
 .section-title {
   font-weight: bold;
   font-size: 1.07em;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin-bottom: 4px;
-}
-.sub-title {
-  font-weight: 600;
-  margin: 6px 0 2px;
-}
-/* for all your numeric spans in status panel */
-.yellow-value {
-  color: #f7d860 !important;
-  font-weight: bold;
-}
-.green-value {
-  color: #089357 !important;
-  font-weight: bold;
+  color: #f7d860; /* Gold for titles */
 }
 
-/* NEW Dedicated Checkbox Styling */
+.sub-title {
+  font-weight: 600;
+  margin: 6px 0 2px 0;
+  color: #bbd7ff; /* Lighter blue for subs */
+  font-size: 0.95em;
+}
+
+/* ─── Value Highlights ─── */
+.yellow-value {
+  color: #f7d860;
+  font-weight: bold;
+  font-family: monospace; /* Numeric alignment */
+}
+
+.green-value {
+  color: #089357;
+  font-weight: bold;
+  font-family: monospace;
+}
+
+/* ─── Custom Checkboxes for Insurance/Mods ─── */
 .ins-mod-checkbox {
   appearance: none;
+  -webkit-appearance: none; /* Webkit support */
   margin-right: 8px;
   width: 18px;
   height: 18px;
@@ -56,28 +109,108 @@
   background: #232344;
   vertical-align: middle;
   cursor: pointer;
+  border-radius: 3px; /* Slight round */
+  transition: 
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.1s ease;
+  position: relative;
 }
+
+.ins-mod-checkbox:hover {
+  transform: scale(1.1); /* Subtle feedback */
+}
+
 .ins-mod-checkbox:checked {
   background: #f7d860;
   border-color: #f7d860;
 }
-.ins-mod-checkbox:checked:after {
-  content: '\\2714';
-  color: #111237;
+
+.ins-mod-checkbox:checked::after {
+  content: '\2714';
+  color: #111237; /* Dark check on gold */
   display: block;
   text-align: center;
   font-size: 14px;
-  line-height: 18px;
+  line-height: 16px; /* Adjusted for centering */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
+
+.ins-mod-checkbox:focus-visible {
+  outline: 2px solid #f7d860;
+  outline-offset: 2px;
+}
+
+.ins-mod-checkbox:disabled {
+  background: #1a1a2e;
+  border-color: #555;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.ins-mod-checkbox:disabled:checked::after {
+  color: #666;
+}
+
+/* ─── Native Accent Colors (Fallbacks) ─── */
 .insurance-box {
   accent-color: #f7d860;
 }
+
 .mod-box {
   accent-color: #b1d1ee;
 }
 
-/* Insurance Label for Alignment */
+/* ─── Insurance Labels ─── */
 .insurance-label {
   display: inline-block;
-  width: 60px; /* Fixed width for consistent alignment */
+  width: 60px; /* Fixed for alignment */
+  font-weight: 500;
+  color: #bbd7ff;
+  vertical-align: middle;
+}
+
+/* ─── Responsive Adjustments ─── */
+@media (max-width: 768px) {
+  #props-panel {
+    flex: 0 0 280px; /* Narrower on tablets */
+    padding: 14px 16px;
+  }
+  
+  .status-section {
+    margin: 12px 0 6px 0;
+  }
+  
+  .ins-mod-checkbox {
+    width: 20px;
+    height: 20px; /* Larger for touch */
+  }
+  
+  .ins-mod-checkbox:checked::after {
+    font-size: 16px;
+    line-height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  #props-panel {
+    flex: 1 1 100%; /* Full width on mobile, in Global.css column flow */
+    max-width: 100%;
+    border-radius: 0; /* Full-width no corners */
+    padding: 12px 14px;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .insurance-label {
+    width: 50px; /* Tighter on small */
+  }
+  
+  .section-title {
+    font-size: 1em;
+    letter-spacing: 1px;
+  }
 }

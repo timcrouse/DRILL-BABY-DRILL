@@ -5,6 +5,10 @@
   <title>Drill Baby Drill</title>
   <!-- Google Fonts for Luckiest Guy -->
   <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy" rel="stylesheet">
+  <!-- Leaflet CSS for oil map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Suppress favicon 404 error -->
+  <link rel="icon" href="data:,">
   <!-- No monolithic style.css—loaded dynamically in main.js -->
 </head>
 <body>
@@ -101,6 +105,8 @@
         <table id="xy-grid"></table>
         <div id="well-data-bar"></div>
       </div>
+      <!-- Oil map container for geo visualization -->
+      <div id="oil-map-container" style="height: 400px; width: 100%; margin-top: 20px;"></div>
     </div>
   </div>
   <div id="modalMessage">
@@ -125,6 +131,8 @@
   <div id="declineConfirmModal" style="display: none;">
     <div class="decline-confirm"></div>
   </div>
+  <!-- Leaflet JS for oil map -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script type="module" src="main.js"></script>
 </body>
 </html>

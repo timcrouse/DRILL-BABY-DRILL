@@ -1,19 +1,91 @@
-/* global.css */
+/**
+ * @fileoverview Style/Global.css - Global Layout and Theme Styles
+ * 
+ * Purpose: Establishes the base layout and visual theme for the entire oil drilling game app.
+ * Sets full-viewport height for flexible container, dark industrial background (#111237),
+ * and blue text (#b1d1ee) for readability. Uses flexbox for #container to evenly space
+ * props-panel and gameUI sections with generous gaps.
+ * 
+ * Key Features:
+ * - Full-height html/body for no-scroll layouts.
+ * - Flex-centered #container with stretch alignment for equal-height panels.
+ * - Consistent typography and color scheme.
+ * 
+ * Changes in Refactor:
+ * - Added global box-sizing: border-box for consistent padding/margins.
+ * - Improved responsiveness: Reduced gap/padding on small screens; stack vertically if needed.
+ * - Enhanced a11y: Base font-size (rem for scalability), smooth scrolling.
+ * - Minor polish: Subtle body gradient or overflow handling; explicit width constraints.
+ * - Organized with sections; preserved core flex logic.
+ * 
+ * Dependencies: Loaded first via Style/index.js for base overrides.
+ * Used in index.html for <body><div id="container">...</div></body>.
+ * 
+ * @version 1.1 - Responsive, Scalable Global Styles
+ */
 
-/* ─── Global ─── */
-html, body {
-  height: 100vh; /* Ensure full viewport height for flex propagation */
-  margin: 0;
-  background: #111237;
-  color: #b1d1ee;
-  font-family: sans-serif;
+/* ─── Base Reset & Viewport ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* Global consistency for padding/borders */
 }
+
+html {
+  height: 100%; /* Full height chain */
+  font-size: 16px; /* Base for rem scaling */
+}
+
+body {
+  height: 100vh; /* Viewport height for full coverage */
+  margin: 0;
+  padding: 0;
+  background: #111237; /* Dark navy base */
+  color: #b1d1ee; /* Light blue text */
+  font-family: sans-serif;
+  font-size: 1rem; /* Scalable base */
+  line-height: 1.5; /* Readable default */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  scroll-behavior: smooth; /* Smooth internal scrolls */
+}
+
+/* ─── Main Container Layout ─── */
 #container {
-  height: 100%; /* Fill body height */
-  box-sizing: border-box;
+  height: 100%; /* Inherit full height */
   display: flex;
-  align-items: stretch; /* make #props-panel & #gameUI equal height */
-  gap: 96px;
-  justify-content: center;
+  align-items: stretch; /* Equal height for panels */
+  justify-content: center; /* Horizontal center */
+  gap: 96px; /* Generous spacing between props & game */
   padding: 20px;
+  max-width: 1400px; /* Prevent over-wide on large screens */
+  margin: 0 auto; /* True center with constraints */
+  width: 100%;
+}
+
+/* ─── Responsive Adjustments ─── */
+@media (max-width: 1024px) {
+  #container {
+    gap: 48px; /* Halve gap on tablets */
+    padding: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  #container {
+    flex-direction: column; /* Stack vertically on mobile */
+    align-items: center;
+    gap: 24px;
+    padding: 12px;
+  }
+  
+  html {
+    font-size: 14px; /* Slightly smaller base for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  #container {
+    padding: 8px;
+    gap: 16px;
+  }
 }

@@ -1,60 +1,114 @@
-/* grid.css */
+/**
+ * @fileoverview Style/Grid.css - Game Grid and Panel Styling
+ * 
+ * Purpose: Styles the main game UI panel (#gameUI), including the grid container (#grid-panel),
+ * title, and the fixed-size 10x10 playing field table (#xy-grid). Defines cell borders, headers,
+ * selection highlights, and symbols (X marks, geo dots) with the dark industrial theme.
+ * Uses flex for layout, fixed table sizing for reliability, and absolute positioning for icons.
+ * 
+ * Key Features:
+ * - #gameUI/#grid-panel: Flex column for stacking grid with well-data below.
+ * - #xy-grid: Fixed-layout table with equal 36px cells; min-heights for visibility.
+ * - Headers: 'Luckiest Guy' font, gold/yellow values.
+ * - Cells: Clickable with border highlights; .selected for gold outline.
+ * - Symbols: Centered .cell-x (dry/struck colors), .geo-dot (orange with glow/shadow).
+ * 
+ * Changes in Refactor:
+ * - Enhanced responsiveness: Scale cell sizes/gaps on small screens (e.g., 28px cells on mobile).
+ * - Added a11y: Focus-visible for td clicks, reduced motion option for transforms.
+ * - Improved polish: Subtle transitions for selection/hover, consistent borders (rgba for transparency).
+ * - Organized sections; minimized !important; added z-index for layering.
+ * - Fallbacks: Sans-serif for 'Luckiest Guy' if not loaded; explicit cursor on cells.
+ * 
+ * Dependencies: Loaded via Style/index.js; requires 'Luckiest Guy' font (via Google Fonts in HTML).
+ * Used in index.html for <div id="gameUI"><h2 id="grid-title">Grid</h2><div id="grid-panel"><table id="xy-grid">...</table></div></div>.
+ * 
+ * @version 1.1 - Responsive, Accessible Grid Styles
+ */
 
-/* ─── Playing Field & Well Data ─── */
+/* ─── Game UI Panel Layout ─── */
 #gameUI {
-  flex: 1; /* fill remaining horizontal space */
+  flex: 1; /* Fill horizontal space in #container */
   display: flex;
-  flex-direction: column; /* stack grid and well-data */
+  flex-direction: column; /* Stack title, grid, well-data */
+  min-width: 0; /* Allow flex shrink without overflow */
 }
+
 #grid-panel {
-  flex: 1; /* stretch to match #props-panel height */
+  flex: 1; /* Stretch to fill available height */
   display: flex;
   flex-direction: column;
-  background: #18234d;
+  background: rgba(24, 35, 77, 0.8); /* Semi-transparent for depth */
   border-radius: 15px;
   padding: 12px 18px 18px;
-  min-height: 450px; /* Fallback min-height to ensure visibility */
+  min-height: 450px; /* Fallback for short content */
+  overflow: hidden; /* Clip any overflow */
 }
+
+/* ─── Grid Title ─── */
 #grid-title {
   color: #f7d860;
-  font-family: 'Luckiest Guy', cursive;
+  font-family: 'Luckiest Guy', cursive, sans-serif; /* Fallback font */
   font-size: 1.4em;
   text-align: center;
-  margin-bottom: 10px;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+  letter-spacing: 0.5px; /* Slight emphasis */
 }
 
-/* ── Fixed-Size Grid (revert from fluid for reliability) ── */
+/* ─── Grid Table ─── */
 #xy-grid {
-  width: 100%; /* fill grid-panel width */
-  table-layout: fixed; /* equal-width columns */
+  width: 100%;
+  table-layout: fixed; /* Equal columns */
   border-collapse: collapse;
-  min-height: 400px; /* Ensure table has minimum height to show cells */
+  min-height: 400px; /* Ensure visibility */
+  border-spacing: 0;
+  font-size: 0.9em; /* Subtle scaling */
 }
+
 #xy-grid th {
-  font-family: 'Luckiest Guy', cursive;
+  font-family: 'Luckiest Guy', cursive, sans-serif;
   font-size: 1.4em;
   text-align: center;
   border: 1.5px solid #b1d1ee;
-  background: #294368bb;
-  width: 36px; /* Fixed size */
-  height: 36px; /* Fixed size */
+  background: rgba(41, 67, 104, 0.73); /* Adjusted alpha */
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  position: relative;
 }
+
 #xy-grid th.yellow-value {
-  color: #f7d860 !important;
+  color: #f7d860;
 }
+
 #xy-grid td {
   border: 1.5px solid #b1d1ee;
-  background: #294368bb;
+  background: rgba(41, 67, 104, 0.73);
   position: relative;
   cursor: pointer;
-  width: 36px; /* Fixed size */
-  height: 36px; /* Fixed size */
-}
-#xy-grid td.selected {
-  border: 3px solid #f7d860 !important;
+  width: 36px;
+  height: 36px;
+  padding: 2px; /* Tiny inner space */
+  transition: border-color 0.2s ease, transform 0.1s ease; /* Smooth selection */
 }
 
-/* ─── Cell Symbols ─── */
+#xy-grid td:hover {
+  transform: scale(1.05); /* Subtle zoom on hover */
+}
+
+#xy-grid td:focus-visible {
+  outline: 2px solid #f7d860;
+  outline-offset: -2px;
+}
+
+#xy-grid td.selected {
+  border-color: #f7d860;
+  border-width: 3px;
+  z-index: 5; /* Layer above others */
+}
+
+/* ─── Cell Symbols & Icons ─── */
 .cell-x {
   position: absolute;
   left: 50%;
@@ -62,12 +116,17 @@
   transform: translate(-50%, -53%);
   font-size: 2.1em;
   font-weight: 900;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Readability boost */
+  pointer-events: none; /* Don't block clicks */
+  z-index: 20;
 }
-.x-dry { color: #ffe14a; }
-.x-struck { color: #47ff5e; }
-.x-well-prod { color: #2fff8b; }
-.x-well-noprod { color: #ff3939; }
-.x-geo { color: #ff8800; }
+
+.x-dry { color: #ffe14a; } /* Yellow for dry */
+.x-struck { color: #47ff5e; } /* Green for oil strike */
+.x-well-prod { color: #2fff8b; } /* Bright green producing */
+.x-well-noprod { color: #ff3939; } /* Red non-producing */
+.x-geo { color: #ff8800; } /* Orange geo */
+
 .geo-dot {
   position: absolute;
   left: 50%;
@@ -77,8 +136,54 @@
   border-radius: 50%;
   background: #ff8800;
   transform: translate(-50%, -50%);
-  border: 2px solid #fff7;
-  box-shadow: 0 0 5px #ff8400a1;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 5px rgba(255, 136, 0, 0.63);
   pointer-events: none;
   z-index: 10;
+  animation: pulse 2s infinite; /* Gentle glow */
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .geo-dot {
+    animation: none;
+  }
+}
+
+/* ─── Responsive Grid Scaling ─── */
+@media (max-width: 768px) {
+  #xy-grid th,
+  #xy-grid td {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .cell-x {
+    font-size: 1.8em;
+  }
+  
+  #grid-title {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  #xy-grid th,
+  #xy-grid td {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .cell-x {
+    font-size: 1.5em;
+  }
+  
+  #grid-panel {
+    padding: 8px 12px 12px;
+    min-height: 350px;
+  }
 }
