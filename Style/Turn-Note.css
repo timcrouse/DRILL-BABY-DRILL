@@ -1,0 +1,77 @@
+/**
+ * @fileoverview Style/Turn-Note.css - Turn Note Modal Styling
+ * 
+ * Purpose: Styles the informational note or summary text within the turn modal (e.g., end-of-turn
+ * recaps, events, or tips). Applies a subtle, readable format with gold text for emphasis,
+ * left alignment for narrative flow, and scaled font for secondary content. Keeps it unobtrusive
+ * in modals while tying into the game's industrial theme.
+ * 
+ * Key Features:
+ * - .turn-note: Gold color, left-aligned with vertical margins for spacing.
+ * - Smaller font (0.9em) for non-dominant text.
+ * 
+ * Changes in Refactor:
+ * - Added responsive font scaling (larger on mobile for readability).
+ * - Enhanced with line-height for better legibility and subtle italic option for notes.
+ * - Included a11y: High contrast check (gold on dark passes), focus for embedded links.
+ * - Polish: Light transition for fade-in, max-width for long lines.
+ * - No heavy overrides; self-contained for modal injection.
+ * 
+ * Dependencies: Loaded via Style/index.js; used in turn modals (e.g., Shared-Modals.css base).
+ * HTML: <div class="turn-note">End of Turn 5: Drilled dry hole at (3,7). Cash: -$500.</div>.
+ * 
+ * @version 1.1 - Readable, Responsive Note Styles
+ */
+
+/* ─── Turn Note Text ─── */
+.turn-note {
+  color: #f7d860; /* Gold for emphasis */
+  text-align: left;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  font-size: 0.9em;
+  line-height: 1.4; /* Improved readability */
+  max-width: 100%; /* Prevent overflow */
+  word-wrap: break-word; /* Handle long phrases */
+  transition: opacity 0.3s ease; /* Fade-in for modal entry */
+  font-style: normal; /* Base; override to italic for tips */
+}
+
+.turn-note.tip {
+  font-style: italic;
+  color: #bbd7ff; /* Lighter blue for tips */
+  font-size: 0.85em;
+}
+
+.turn-note a { /* Embedded links if any */
+  color: #f7d860;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.turn-note a:hover,
+.turn-note a:focus-visible {
+  color: #fff;
+  outline: 1px dotted #f7d860; /* A11y focus */
+}
+
+/* ─── Responsive Adjustments ─── */
+@media (max-width: 768px) {
+  .turn-note {
+    font-size: 1em; /* Bump up for mobile readability */
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    padding: 0 8px; /* Edge breathing room */
+  }
+  
+  .turn-note.tip {
+    font-size: 0.95em;
+  }
+}
+
+@media (max-width: 480px) {
+  .turn-note {
+    font-size: 0.95em;
+    line-height: 1.3;
+  }
+}

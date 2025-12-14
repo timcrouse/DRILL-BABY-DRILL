@@ -1,0 +1,135 @@
+/**
+ * @fileoverview Style/Message-Modal.css - Message Modal Styling
+ * 
+ * Purpose: Styles the generic message modal dialog, focusing on the content box (.modalBox)
+ * for padding, background, and typography. Provides a clean, centered popup for alerts,
+ * errors, or info messages in the oil drilling game. Uses the dark theme with subtle
+ * borders and shadows for immersion without distraction.
+ * 
+ * Key Features:
+ * - .modalBox: Padded content area with rounded corners and elevation.
+ * - Integrates with .message wrapper from Modal.js for targeted text styling.
+ * - Responsive padding for smaller screens.
+ * 
+ * Changes in Refactor:
+ * - Expanded to include full modal container (#modalMessage) and content (.message) for completeness.
+ * - Added theme consistency: Dark bg, blue borders, gold accents if needed.
+ * - Enhanced with transitions, focus for a11y, and responsive scaling.
+ * - Organized sections; added hover effects for any interactive elements.
+ * 
+ * Dependencies: Loaded via Style/index.js; pairs with Shared-Modals.css for backdrop.
+ * Used in Modal.js via showModalMessage() injecting <div class="message">...</div>.
+ * 
+ * @version 1.1 - Themed, Responsive Message Modal
+ */
+
+/* ─── Message Modal Container ─── */
+#modalMessage {
+  display: none; /* Hidden by default; shown via JS */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 18, 68, 0.8); /* Dark overlay */
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px); /* Subtle blur for focus */
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#modalMessage.show {
+  display: flex; /* JS class toggle */
+}
+
+/* ─── Modal Content Box ─── */
+.modalBox {
+  padding: 30px 38px;
+  background: rgba(35, 35, 68, 0.95); /* Dark semi-transparent */
+  border: 2px solid #b1d1ee;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto; /* Scroll long messages */
+  box-shadow: 0 8px 32px rgba(17, 18, 68, 0.4);
+  position: relative;
+  font-family: sans-serif;
+  color: #b1d1ee;
+  line-height: 1.5;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modalBox:hover {
+  transform: scale(1.02); /* Subtle lift on hover */
+  box-shadow: 0 12px 40px rgba(17, 18, 68, 0.5);
+}
+
+.modalBox:focus-within {
+  outline: 2px solid #f7d860;
+  outline-offset: 4px;
+}
+
+/* ─── Message Content ─── */
+.message {
+  margin: 0;
+  text-align: center;
+  font-size: 1.1em;
+  color: #e0e0e0; /* Light gray for body text */
+}
+
+.message.error {
+  color: #ff6a6a; /* Red for errors */
+}
+
+.message.success {
+  color: #47ff5e; /* Green for success */
+}
+
+/* ─── Close Button (if inline) ─── */
+.modalBox button.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #b1d1ee;
+  font-size: 1.5em;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.modalBox button.close:hover {
+  opacity: 1;
+  color: #f7d860;
+}
+
+/* ─── Responsive Adjustments ─── */
+@media (max-width: 768px) {
+  .modalBox {
+    padding: 20px 24px;
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .message {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalBox {
+    padding: 16px 20px;
+  }
+  
+  #modalMessage {
+    backdrop-filter: none; /* Disable blur on low-end devices */
+  }
+}

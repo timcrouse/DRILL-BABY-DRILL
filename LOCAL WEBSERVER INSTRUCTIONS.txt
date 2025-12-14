@@ -1,8 +1,9 @@
 
 
 Python (built-in if you have Python 3+): Open a terminal/command prompt in your project folder and run:
-text
 
+
+GO INTO THE APPLICATION ROOT DIRECTORY
 
 RIGHT CLICK INDEX AND SELECT COMMAND TERMINAL
 

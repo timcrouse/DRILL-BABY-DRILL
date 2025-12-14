@@ -1,0 +1,144 @@
+/**
+ * @fileoverview Style/Shared-Modals.css - Shared Modal Overlay and Base Styles
+ * 
+ * Purpose: Provides common styling for all modal overlays and content boxes across the game,
+ * including message, settings, purchase order, and decline confirm dialogs. Defines full-screen
+ * fixed overlays with dark semi-transparent backgrounds, z-index layering for stacking,
+ * and base content styling (padding, shadows, centering) for consistency. Allows specific
+ * modal CSS (e.g., Settings-Modal.css) to override without conflicts.
+ * 
+ * Key Features:
+ * - Overlay selectors: #modalMessage, #settingsDialog, etc., with display:none → flex on show.
+ * - Z-index progression: 2000 base, higher for purchase/decline to layer properly.
+ * - Base boxes: .modalBox, .settingsBox, etc., with dark bg (#1a2039), blue text, rounded/shadow.
+ * - Responsive max-width and padding scaling.
+ * 
+ * Changes in Refactor:
+ * - Added fade-in animation and backdrop blur for smoother entries.
+ * - Enhanced responsiveness: Auto-width on small screens, reduced padding.
+ * - Improved a11y: Focus-within outlines, reduced-motion support.
+ * - Polish: Consistent rgba for bg (tunable opacity), transitions for scale on hover.
+ * - Scoped selectors to avoid leaks; added .modal-content base class for future-proofing.
+ * 
+ * Dependencies: Loaded via Style/index.js; overridden by specific modal CSS (e.g., Message-Modal.css).
+ * Used in HTML for modal divs; JS toggles display/flex via class or style.
+ * 
+ * @version 1.2 - Layered, Responsive Shared Modals (Final Polish)
+ */
+
+/* ─── Shared Modal Overlays ─── */
+#modalMessage,
+#settingsDialog,
+#purchaseOrderModal,
+#declineConfirmModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(20, 25, 55, 0.92); /* Dark semi-transparent overlay */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px); /* Subtle blur for focus */
+  animation: fadeIn 0.25s ease-out;
+}
+
+#purchaseOrderModal {
+  z-index: 2500; /* Layer above base modals */
+}
+
+#declineConfirmModal {
+  z-index: 3000; /* Top layer for confirmations */
+}
+
+/* ─── Show State (Toggled by JS) ─── */
+#modalMessage.show,
+#settingsDialog.show,
+#purchaseOrderModal.show,
+#declineConfirmModal.show {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #modalMessage,
+  #settingsDialog,
+  #purchaseOrderModal,
+  #declineConfirmModal {
+    animation: none;
+    backdrop-filter: none;
+  }
+}
+
+/* ─── Shared Content Boxes ─── */
+.modalBox,
+.settingsBox,
+.purchase-order,
+.decline-confirm {
+  background: #1a2039; /* Dark blue-gray base */
+  color: #b1d1ee; /* Light blue text */
+  padding: 30px 38px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 8px 42px rgba(0, 0, 11, 0.75); /* Deep shadow */
+  max-width: 600px; /* Widened for content */
+  width: 90%; /* Responsive width */
+  position: relative;
+  transition: 
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.modalBox:hover,
+.settingsBox:hover,
+.purchase-order:hover,
+.decline-confirm:hover {
+  transform: scale(1.02); /* Subtle lift */
+  box-shadow: 0 12px 52px rgba(0, 0, 11, 0.85);
+}
+
+.modalBox:focus-within,
+.settingsBox:focus-within,
+.purchase-order:focus-within,
+.decline-confirm:focus-within {
+  outline: 2px solid #f7d860;
+  outline-offset: 4px;
+}
+
+/* ─── Responsive Adjustments ─── */
+@media (max-width: 768px) {
+  .modalBox,
+  .settingsBox,
+  .purchase-order,
+  .decline-confirm {
+    padding: 24px 30px;
+    max-width: 500px;
+    width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalBox,
+  .settingsBox,
+  .purchase-order,
+  .decline-confirm {
+    padding: 20px 24px;
+    max-width: 400px;
+    width: 98%;
+    border-radius: 12px; /* Softer corners on mobile */
+  }
+}

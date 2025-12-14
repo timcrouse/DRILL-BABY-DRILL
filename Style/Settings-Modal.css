@@ -1,0 +1,284 @@
+/**
+ * @fileoverview Style/Settings-Modal.css - Settings Modal Styling
+ * 
+ * Purpose: Styles the settings dialog modal, including content box (.settingsBox), mode selection
+ * buttons (.mode-btn), description area (.mode-desc), and custom checkboxes for options like insurance.
+ * Creates a compact, centered panel for game modes and toggles with the dark theme and gold/blue accents.
+ * 
+ * Key Features:
+ * - .settingsBox: Fixed-width padded container for modal body.
+ * - .mode-options: Flex row for mode buttons with gaps.
+ * - .mode-btn: Themed buttons with selected state (inherits .main-btn patterns).
+ * - .mode-desc: Faded background box for mode descriptions.
+ * - .custom-checkbox: Appearance-free styled checkboxes with checkmark pseudo-element.
+ * 
+ * Changes in Refactor:
+ * - Added full modal container (#settingsDialog) for overlay and positioning.
+ * - Enhanced responsiveness: Wrap mode buttons, scale padding/font on small screens.
+ * - Improved a11y: Focus-visible on buttons/checkboxes, keyboard-friendly sizing.
+ * - Polish: Subtle shadows/transitions, consistent button inheritance from Buttons.css, hover on desc.
+ * - Organized sections; added disabled state for buttons/checkboxes.
+ * 
+ * Dependencies: Loaded via Style/index.js; aligns with Buttons.css for .mode-btn.
+ * Used in HTML for <div id="settingsDialog" class="settingsBox">...</div>.
+ * 
+ * @version 1.1 - Responsive, Accessible Settings Panel
+ */
+
+/* ─── Settings Modal Container ─── */
+#settingsDialog {
+  display: none; /* Hidden by default; shown via JS */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 18, 68, 0.8); /* Dark overlay */
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#settingsDialog.show {
+  display: flex;
+}
+
+/* ─── Settings Box Content ─── */
+.settingsBox {
+  padding: 40px 45px 34px;
+  width: 360px;
+  background: rgba(35, 35, 68, 0.95); /* Dark semi-transparent */
+  border: 2px solid #b1d1ee;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(17, 18, 68, 0.4);
+  color: #e0e0e0;
+  font-family: inherit;
+  line-height: 1.5;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.settingsBox:hover {
+  transform: scale(1.01); /* Gentle lift */
+}
+
+.settingsBox h2 {
+  margin: 0 0 14px 0;
+  text-align: center;
+  color: #f7d860;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+/* ─── Mode Selection ─── */
+.mode-options {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+  flex-wrap: wrap; /* Responsive wrap */
+}
+
+.mode-btn {
+  background: #232344;
+  border: 2px solid #b1d1ee;
+  border-radius: 8px;
+  color: #f7d860;
+  padding: 6px 20px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.mode-btn:hover,
+.mode-btn:focus-visible {
+  background: #222867;
+  border-color: #f7d860;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(247, 216, 96, 0.3);
+  outline: none;
+}
+
+.mode-btn:focus {
+  outline: 2px solid #f7d860;
+  outline-offset: 2px;
+}
+
+.mode-btn.selected {
+  background: #222867;
+  border-color: #f7d860;
+  color: #fff;
+  box-shadow: 0 0 0 2px rgba(247, 216, 96, 0.5); /* Glow for selected */
+}
+
+.mode-btn:disabled {
+  background: #1a1a2e;
+  border-color: #555;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ─── Mode Description ─── */
+.mode-desc {
+  font-size: 1.05em;
+  background: rgba(22, 34, 76, 0.8); /* Faded dark blue */
+  color: #bbd7ff;
+  border-radius: 6px;
+  margin-top: 8px;
+  padding: 12px 16px;
+  border: 1px solid #b1d1ee;
+  transition: box-shadow 0.2s ease;
+  line-height: 1.4;
+}
+
+.mode-desc:hover {
+  box-shadow: inset 0 0 0 1px #f7d860; /* Subtle gold inner glow */
+}
+
+/* ─── Settings Buttons (Close/Reset) ─── */
+.settingsBox button {
+  display: block;
+  margin: 18px auto 0; /* Centered */
+  padding: 8px 22px;
+  background: #232344;
+  border: 2px solid #b1d1ee;
+  border-radius: 8px;
+  color: #f7d860; /* Gold text for theme */
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.settingsBox button:hover,
+.settingsBox button:focus-visible {
+  background: #1c2342;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(247, 216, 96, 0.2);
+  outline: none;
+}
+
+.settingsBox button:focus {
+  outline: 2px solid #f7d860;
+  outline-offset: 2px;
+}
+
+.settingsBox button:disabled {
+  background: #1a1a2e;
+  border-color: #555;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ─── Custom Checkboxes (e.g., Insurance Toggles) ─── */
+.custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none; /* Webkit fallback */
+  width: 24px;
+  height: 24px;
+  border: 2px solid #b1d1ee;
+  background: #232344;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  border-radius: 4px; /* Slight rounding */
+  position: relative;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.custom-checkbox:checked {
+  background: #f7d860;
+  border-color: #f7d860;
+}
+
+.custom-checkbox:checked::after {
+  content: '\2714';
+  color: #232344; /* Dark checkmark on gold */
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.custom-checkbox:focus-visible {
+  outline: 2px solid #f7d860;
+  outline-offset: 2px;
+}
+
+.custom-checkbox:disabled {
+  background: #1a1a2e;
+  border-color: #555;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.custom-checkbox:disabled:checked::after {
+  color: #666;
+}
+
+/* ─── Responsive Adjustments ─── */
+@media (max-width: 768px) {
+  .settingsBox {
+    width: 320px;
+    padding: 30px 35px 24px;
+  }
+  
+  .mode-options {
+    gap: 8px;
+  }
+  
+  .mode-btn {
+    padding: 5px 16px;
+    font-size: 13px;
+  }
+  
+  .mode-desc {
+    font-size: 1em;
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .settingsBox {
+    width: 90%;
+    max-width: 280px;
+    padding: 24px 28px 20px;
+  }
+  
+  .mode-options {
+    flex-direction: column; /* Stack modes on tiny screens */
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .custom-checkbox {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .custom-checkbox:checked::after {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}

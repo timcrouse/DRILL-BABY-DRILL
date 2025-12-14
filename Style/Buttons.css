@@ -1,0 +1,128 @@
+/**
+ * @fileoverview Style/Buttons.css - Button Styling for Game UI
+ * 
+ * Purpose: Defines consistent button styles for the oil drilling game, including main actions,
+ * resource buttons, well controls, and icon buttons. Uses a dark theme with blue/gold accents
+ * for industrial feel. Includes hover/focus transitions for interactivity.
+ * 
+ * Key Features:
+ * - .main-btn: Primary button base (e.g., Next Turn, Drill).
+ * - .resource-btn: Fixed-width for resource purchases.
+ * - .well-buttons: Flex container for well action groups.
+ * - .icon-btn: Square icon buttons (e.g., with SVGs).
+ * - Accessibility: Focus styles, cursor pointers.
+ * 
+ * Changes in Refactor:
+ * - Added :focus-visible for keyboard nav (better a11y).
+ * - Included .main-btn:disabled state (grayed out, no interactions).
+ * - Enhanced transitions (added box-shadow on hover).
+ * - Organized sections with CSS comments.
+ * - Ensured consistent spacing/units (px for now; rem if scaling added later).
+ * 
+ * Dependencies: Loaded via Style/index.js dynamic <link>.
+ * Used in HTML for buttons like #drillBtn, .mode-btn.
+ * 
+ * @version 1.1 - Accessible, Themed Button Styles
+ */
+
+/* ─── Main Action Buttons ─── */
+.main-btn {
+  background: #232344;
+  border: 2px solid #b1d1ee;
+  border-radius: 8px;
+  color: #f7d860;
+  padding: 6px 20px;
+  font-weight: 700;
+  font-size: 14px; /* Consistent sizing */
+  cursor: pointer;
+  box-shadow: 0 2px 7px rgba(17, 18, 68, 0.12);
+  margin: 4px 4px 4px 0;
+  transition: 
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+  text-decoration: none; /* For <a> styled as btn */
+  display: inline-block;
+}
+
+.main-btn:hover,
+.main-btn:focus-visible {
+  background: #222867;
+  border-color: #f7d860;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(17, 18, 68, 0.2);
+  outline: none; /* Remove default focus outline; use custom */
+}
+
+.main-btn:focus {
+  outline: 2px solid #f7d860;
+  outline-offset: 2px;
+}
+
+.main-btn:disabled {
+  background: #1a1a2e;
+  border-color: #555;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+/* ─── Resource Buttons (Fixed Width) ─── */
+.resource-btn {
+  width: calc(4ch + 40px); /* Fits 4-char text + padding */
+}
+
+/* ─── Well Button Groups ─── */
+.well-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap; /* Responsive on small screens */
+}
+
+/* ─── Icon Buttons (SVG-Focused) ─── */
+.icon-btn {
+  background: #232344;
+  border: 2px solid #b1d1ee;
+  border-radius: 6px;
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  flex-shrink: 0; /* Prevent squishing in flex */
+}
+
+.icon-btn:hover,
+.icon-btn:focus-visible {
+  background: #222867;
+  border-color: #f7d860;
+  box-shadow: 0 2px 8px rgba(247, 216, 96, 0.3);
+  outline: none;
+}
+
+.icon-btn:focus {
+  outline: 2px solid #f7d860;
+  outline-offset: 2px;
+}
+
+.icon-btn:disabled {
+  background: #1a1a2e;
+  border-color: #555;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.icon-btn svg {
+  width: 32px;
+  height: 32px;
+  fill: currentColor; /* Inherit color from parent */
+  stroke: currentColor; /* For stroked icons */
+}
